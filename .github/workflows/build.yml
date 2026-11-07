@@ -15,15 +15,20 @@ jobs:
 
       - name: Setup Theos and dependencies
         run: |
-          # 1. Cài đặt các gói phụ thuộc cho Linux
+          # 1. Cài đặt các gói phụ thuộc cơ bản (không bao gồm ldid)
           sudo apt-get update
-          sudo apt-get install -y ldid dpkg fakeroot make curl unzip
+          sudo apt-get install -y dpkg fakeroot make curl unzip
           
-          # 2. Clone Theos
+          # 2. Tải và cài đặt ldid trực tiếp từ ProcursusTeam
+          sudo mkdir -p /usr/local/bin
+          sudo curl -L https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_linux_x86_64 -o /usr/local/bin/ldid
+          sudo chmod +x /usr/local/bin/ldid
+          
+          # 3. Clone Theos
           git clone --recursive https://github.com/theos/theos.git $HOME/theos
           echo "THEOS=$HOME/theos" >> $GITHUB_ENV
           
-          # 3. Tải toàn bộ bộ SDK iOS
+          # 4. Tải toàn bộ bộ SDK iOS
           mkdir -p $HOME/theos/sdks
           cd $HOME/theos/sdks
           curl -L -o sdks.zip https://github.com/theos/sdks/archive/refs/heads/master.zip
