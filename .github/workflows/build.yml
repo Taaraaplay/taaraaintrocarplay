@@ -1,0 +1,34 @@
+name: Build Deb
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build with Theos Action
+        uses: Randomblock1/theos-action@v1
+        with:
+          theos-dir: 'theos'
+          theos-src: 'https://github.com/theos/theos'
+          theos-sdks: 'https://github.com/theos/sdks'
+
+      - name: Package
+        run: |
+          make clean || true
+          make package FINALPACKAGE=1
+          mkdir -p output/rootful
+          mv packages/*.deb output/rootful/ 2>/dev/null || true
+          
+          make clean || true
+          make package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          mkdir -p output/rootless
+          mv packages/*.deb output/rootless/ 2>/dev/null || true
+
+      - name: Upload .deb files
+        uses: actions/upload-artifact@v4
+        with:
+          name: CarPlayVideoWallpaper-debs
+          path: output/**/*.deb
