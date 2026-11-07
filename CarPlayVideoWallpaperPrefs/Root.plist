@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>cell</key><string>PSGroupCell</string>
+            <key>label</key><string>CarPlay Video Wallpaper</string>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSSwitchCell</string>
+            <key>label</key><string>Bật tính năng</string>
+            <key>key</key><string>Enabled</string>
+            <key>default</key><true/>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSGroupCell</string>
+            <key>label</key><string>Đường dẫn tới file video (.mp4)</string>
+            <key>footerText</key>
+            <string>Ví dụ: /var/mobile/Media/CarPlayWallpaper.mp4 — Nên dùng video 800x480 (hoặc tỷ lệ 5:3), codec H.264, bitrate dưới 5 Mbps.</string>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSTextFieldCell</string>
+            <key>label</key><string>Path</string>
+            <key>key</key><string>VideoPath</string>
+            <key>default</key><string>/var/mobile/Media/CarPlayWallpaper.mp4</string>
+            <key>placeholder</key><string>/var/mobile/Media/CarPlayWallpaper.mp4</string>
+            <key>isURL</key><false/>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSGroupCell</string>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSButtonCell</string>
+            <key>label</key><string>Xem trước video</string>
+            <key>action</key><string>previewVideo:</string>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSButtonCell</string>
+            <key>label</key><string>Respring (áp dụng thay đổi)</string>
+            <key>action</key><string>respring:</string>
+        </dict>
+        <dict>
+            <key>cell</key><string>PSGroupCell</string>
+            <key>footerText</key>
+            <string>Hướng dẫn: (1) Mở Filza, chép file .mp4 vào /var/mobile/Media/. (2) Copy đường dẫn file. (3) Dán vào ô Path phía trên. (4) Respring. (5) Kết nối CarPlay — video sẽ tự phát.</string>
+        </dict>
+    </array>
+</dict>
+</plist>
