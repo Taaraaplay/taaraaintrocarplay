@@ -15,7 +15,7 @@ jobs:
 
       - name: Setup Theos and dependencies
         run: |
-          # 1. Cài đặt các gói phụ thuộc cơ bản (không bao gồm ldid)
+          # 1. Cài đặt các gói phụ thuộc cơ bản
           sudo apt-get update
           sudo apt-get install -y dpkg fakeroot make curl unzip
           
@@ -35,6 +35,12 @@ jobs:
           unzip -q sdks.zip
           mv sdks-master/*.sdk .
           rm -rf sdks-master sdks.zip
+
+          # 5. Tải và giải nén iOS Toolchain cho Linux
+          mkdir -p $HOME/theos/toolchain/linux/iphone
+          curl -L https://github.com/sbingner/llvm-project/releases/download/v10.0.0-1/linux-ios-arm64e-clang-toolchain.tar.lzma -o toolchain.tar.lzma
+          tar -xf toolchain.tar.lzma -C $HOME/theos/toolchain/linux/iphone
+          rm toolchain.tar.lzma
 
       - name: Build ROOTFUL package
         run: |
