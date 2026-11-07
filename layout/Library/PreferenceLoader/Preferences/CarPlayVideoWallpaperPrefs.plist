@@ -1,0 +1,8 @@
+{
+    entry = {
+        bundle = CarPlayVideoWallpaperPrefs;
+        cell = PSLinkCell;
+        detail = RootListController;
+        label = "CarPlay Video Wallpaper";
+    };
+}
