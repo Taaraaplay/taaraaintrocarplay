@@ -1,0 +1,9 @@
+Package: com.you.carplayvideowallpaper
+Name: CarPlay Video Wallpaper
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: Phát video làm hình nền khi CarPlay kết nối (hỗ trợ 800x480). Có menu trong Cài đặt để đổi video.
+Maintainer: YourName
+Author: YourName
+Section: Tweaks
+Depends: mobilesubstrate, firmware (>= 14.0), preferenceloader
