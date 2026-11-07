@@ -7,40 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Theos and dependencies
-        run: |
-          # 1. Cài đặt các gói phụ thuộc cơ bản
-          sudo apt-get update
-          sudo apt-get install -y dpkg fakeroot make curl unzip
-          
-          # 2. Tải và cài đặt ldid trực tiếp từ ProcursusTeam
-          sudo mkdir -p /usr/local/bin
-          sudo curl -L https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_linux_x86_64 -o /usr/local/bin/ldid
-          sudo chmod +x /usr/local/bin/ldid
-          
-          # 3. Clone Theos
-          git clone --recursive https://github.com/theos/theos.git $HOME/theos
-          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
-          
-          # 4. Tải toàn bộ bộ SDK iOS
-          mkdir -p $HOME/theos/sdks
-          cd $HOME/theos/sdks
-          curl -L -o sdks.zip https://github.com/theos/sdks/archive/refs/heads/master.zip
-          unzip -q sdks.zip
-          mv sdks-master/*.sdk .
-          rm -rf sdks-master sdks.zip
-
-          # 5. Tải và giải nén iOS Toolchain cho Linux
-          mkdir -p $HOME/theos/toolchain/linux/iphone
-          curl -L https://github.com/sbingner/llvm-project/releases/download/v10.0.0-1/linux-ios-arm64e-clang-toolchain.tar.lzma -o toolchain.tar.lzma
-          tar -xf toolchain.tar.lzma -C $HOME/theos/toolchain/linux/iphone
-          rm toolchain.tar.lzma
+      - name: Prepare Theos
+        uses: huami1314/theos-action@main
 
       - name: Build ROOTFUL package
         run: |
